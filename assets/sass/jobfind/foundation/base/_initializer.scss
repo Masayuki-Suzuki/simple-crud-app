@@ -1,0 +1,165 @@
+@charset "utf-8";
+/*****************************
+fontawesome
+*****************************/
+@font-face {
+  font-family: 'fontawesome';
+  src: url("#{$font-path}fontawesome-webfont.eot");
+  src: url("#{$font-path}fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("#{$font-path}fontawesome-webfont.woff") format("woff"), url("#{$font-path}fontawesome-webfont.ttf") format("truetype"), url("#{$font-path}fontawesome-webfont.svg#fontawesome") format("svg");
+}
+
+/*****************************
+fontfamily initialisation
+*****************************/
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Bold");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Regular");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Regular");
+  font-weight: 200;
+}
+
+//******************************
+//Base initialize
+//******************************
+h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transform: rotate(.03deg);
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html{
+  font-size:$base-font-size * 1% !important;
+}
+
+body#pagetop{
+  background-color: $bg-color !important;
+  color: $font-color;
+  font-family: $font-setting;
+  font-size: inherit;
+  font-weight: $font-weight-origin;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+  height: inherit; //100%; 今後は不要かも
+  margin: 0;
+  padding: 0;
+  //bodyにtransformを付けるとfixedが動かなくなる
+  //transform: rotate(.03deg);
+  //Bodyにパディング付けるのはあまり良くないかも
+  //@media #{$iPhoneX} {
+  //  padding: constant(safe-area-inset-top) constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+  //}
+
+  @media #{$sp-large} {
+    font-family: $font-setting;
+  }
+  @media #{$IE11} {
+    font-family: $font-setting-IE;
+  }
+}
+
+a{
+  text-decoration: none !important;
+  &:hover{
+    text-decoration: none !important;
+  }
+  img{
+    border: 0;
+  }
+}
+
+.recruitInfo{
+  display: none;
+}
+
+div#container{
+  background: $bg-color;
+  //transform: translateX(0);
+  transition: all 0.3s ease-in-out;
+  /* for OffCanvas Nav*/
+  //overflow: auto;
+  width: inherit;
+  overflow: hidden;
+  &.container{
+
+  }
+}
+
+#headContent{
+  margin: 0;
+}
+
+#main {
+  .content {
+    @media #{$tablet} {
+      margin: {
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
+#bottomContent{
+  background: #fff;
+  margin: 0 auto;
+  max-width: $main-width;
+  padding: 0 0 40px;
+  width: 90%;
+  a{
+    color: #333;
+    @include pseudo(#333);
+  }
+  @media #{$sp-large} {
+    padding: 0 0 20px;
+  }
+}
+
+#areaLink div.area table{
+  margin: 0;
+  @media #{$sp-large} {
+    margin: 0 auto;
+  }
+}
+
+.space{
+  //background: $sub-color3;
+  //padding-top: 124px;
+  //jsで動的設定
+  //transition: all 0.41s ease;
+}
+

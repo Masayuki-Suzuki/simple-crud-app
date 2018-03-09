@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "rules": {
+    "semi": ["error", "never"],
+    "no-unused-expressions": ["error", {
+      "allowShortCircuit": true,
+      "allowTernary": true
+    }],
+    "use-isnan": 1,
+    "max-len": ["error", { "code": 200}]
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "location": true,
+    "requestAnimationFrame": true
+  }
+}

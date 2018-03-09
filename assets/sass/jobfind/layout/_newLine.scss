@@ -1,0 +1,50 @@
+.newLine{
+  display: block;
+}
+
+.newLinePC{
+  display: block;
+  @media #{$tablet} {
+    display: inline;
+  }
+}
+
+.newLinePC-TB{
+  display: block;
+  @media #{$tablet} {
+    display: block;
+  }
+  @media #{$sp-large} {
+    display: inline;
+  }
+}
+
+.newLineTB{
+  display: inline;
+  @media #{$tablet} {
+    display: block;
+  }
+  @media #{$sp-large} {
+    display: inline;
+  }
+}
+
+.newLineTB-SP{
+  display: inline;
+  @media #{$tablet} {
+    display: block;
+  }
+  @media #{$sp-large} {
+    display: block;
+  }
+}
+
+.newLineSP{
+  display: inline;
+  @media #{$tablet} {
+    display: inline;
+  }
+  @media #{$sp-large} {
+    display: block;
+  }
+}

@@ -1,0 +1,6 @@
+.mb20 {
+  margin-bottom: 20px;
+  @media #{$sp-large} {
+    margin-bottom: 10px;
+  }
+}

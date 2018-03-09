@@ -1,0 +1,11 @@
+$sp-small: (max-width: 500px);
+$sp-large: (max-width: 740px);
+$tablet: (max-width: 900px);
+$pc-small: (max-width: $main-width);
+$pc-large: (max-width: 1200px);
+$ovTablet: (min-width: 900px);
+$ovSp-large: (min-width: 740px);
+$iPhoneX: (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3);
+$IE11: all and (-ms-high-contrast:none);
+$edge: (-ms-accelerator:true) or (-ms-ime-align:auto);
+$map: (max-width: 768px);

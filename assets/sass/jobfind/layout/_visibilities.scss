@@ -1,0 +1,34 @@
+.pc{
+  display: block !important;
+  @media (max-width: 900px) {
+    display: none !important;
+  }
+}
+
+.tab{
+  display: none !important;
+  @media (max-width: 740px){
+    display: none !important;
+  }
+}
+
+.pc-tab{
+  display: block !important;
+  @media (max-width: 740px){
+    display: none !important;
+  }
+}
+
+.tab-sp{
+  display: none !important;
+  @media (max-width: 900px){
+    display: block !important;
+  }
+}
+
+.sp{
+  display: none !important;
+  @media (max-width: 740px) {
+    display: block !important;
+  }
+}

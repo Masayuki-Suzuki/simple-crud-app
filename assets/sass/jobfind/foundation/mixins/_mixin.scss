@@ -1,0 +1,33 @@
+//******************************
+//            Mixin
+//******************************
+
+//Rem size fallback
+@mixin rem($size){
+  font-size: $size*1px;
+  font-size: $size/10*1rem;
+}
+
+//Common hover
+@mixin hover($deco: none){
+  &:hover{
+    opacity:0.75;
+    transition: 0.3s ease 0s;
+    text-decoration: $deco !important;
+  }
+}
+
+//Anchor color unifier
+@mixin pseudo($color:"#00f",$deco:none){
+  &:active,
+  &:link,
+  &:visited{
+    color:$color !important;
+    text-decoration: $deco !important;
+  }
+}
+
+@mixin subPageHeroImage($fileName,$locaX:center,$locaY:center,$bg-size:cover){
+  background: url(../img/#{$fileName}) no-repeat $locaX $locaY;
+  background-size: $bg-size;
+}

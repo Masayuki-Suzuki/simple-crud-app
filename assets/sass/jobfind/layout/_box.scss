@@ -1,0 +1,32 @@
+.box {
+  margin: auto;
+  padding: 0;
+  max-width: 960px;
+  width: 95%;
+  //@media #{$tablet} {
+  //  width: 95%;
+  //}
+  @media #{$iPhoneX} {
+    padding: 0 constant(safe-area-inset-right) 0 constant(safe-area-inset-left);
+    padding: 0 env(safe-area-inset-right) 0 calc(env(safe-area-inset-left));
+  }
+  @media #{$sp-large} {
+    padding: 0;
+    width: 100%;
+  }
+  &__img {
+    margin: 20px auto 0;
+    img {
+      width: 100%;
+    }
+    @media #{$sp-large} {
+      margin: 10px auto 0;
+    }
+  }
+  &__link {
+    @media #{$sp-large} {
+      margin: 30px auto;
+      width: 95%;
+    }
+  }
+}
