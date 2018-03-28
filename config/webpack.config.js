@@ -3,10 +3,9 @@ require('babel-polyfill')
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const SiteData = require('../assets/siteData')
 
 const extractSass = new ExtractTextPlugin({
-  filename: '/original/css/[name].css',
+  filename: '/css/[name].css',
   allChunks: true
 })
 
@@ -27,14 +26,13 @@ if (!DEV) {
 
 module.exports = {
   entry: {
-    custom: path.join(__dirname, '../assets/js/jobfind/custom.js'),
-    topPage: path.join(__dirname, '../assets/sass/jobfind/topPage.scss'),
-    original: path.join(__dirname, '../assets/sass/jobfind/original.scss'),
-    'vendor/normalize': path.join(__dirname, '../assets/sass/jobfind/vendor/normalize.scss')
+    app: path.join(__dirname, '../src/index.jsx'),
+    style: path.join(__dirname, '../assets/sass/style.scss'),
+    'vendor/normalize': path.join(__dirname, '../assets/sass/vendor/normalize.scss')
   },
   output: {
-    path: path.resolve(__dirname, '../public/js'),
-    filename: 'original/js/[name].js',
+    path: path.resolve(__dirname, '../public/'),
+    filename: 'js/[name].js',
   },
   module: {
     rules: [

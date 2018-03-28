@@ -26,10 +26,10 @@ module.exports = {
     "ignoreInitial": true
   },
   "server": {
-    "baseDir": "www"
+    "baseDir": "public"
   },
   "proxy": false,
-  "port": 3000,
+  "port": 4000,
   "middleware": false,
   "serveStatic": [],
   "ghostMode": {
