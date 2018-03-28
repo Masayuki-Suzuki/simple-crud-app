@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import AddForm from './AddForm'
 import CharacterList from './CharacterList'
 
@@ -13,5 +14,21 @@ class App extends Component {
     )
   }
 }
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = (dispatch) => {
+  const test = () => {
+    console.log('test')
+  }
+  return {
+    dispatch,
+    test,
+  }
+}
+
+/* eslint-disable no-class-assign */
+App = connect(mapStateToProps, mapDispatchToProps)(App)
+/* eslint-enable no-class-assign */
 
 export default App

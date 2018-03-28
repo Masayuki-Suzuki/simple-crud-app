@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
-import App from './component/container'
+import App from './component/App'
 import rootReducer from './reducers/reducers'
 
 /* eslint-disable no-underscore-dangle */

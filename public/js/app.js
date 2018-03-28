@@ -3276,9 +3276,9 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _redux = __webpack_require__(18);
 
-var _container = __webpack_require__(96);
+var _App = __webpack_require__(97);
 
-var _container2 = _interopRequireDefault(_container);
+var _App2 = _interopRequireDefault(_App);
 
 var _reducers = __webpack_require__(140);
 
@@ -3293,7 +3293,7 @@ var store = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_
 _reactDom2.default.render(_react2.default.createElement(
   _reactRedux.Provider,
   { store: store },
-  _react2.default.createElement(_container2.default, null)
+  _react2.default.createElement(_App2.default, null)
 ), document.getElementById('app'));
 
 /***/ }),
@@ -22266,46 +22266,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(28);
-
-var _App = __webpack_require__(97);
-
-var _App2 = _interopRequireDefault(_App);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import rootReducer from '../reducers/reducers'
-
-// const store = createStore(rootReducer, null)
-
-var mapStateToProps = function mapStateToProps(state) {
-  return state;
-};
-// import { createStore } from 'redux'
-
-
-var mapDispatchToProps = function mapDispatchToProps() {
-  var test = function test() {
-    console.log('test');
-  };
-  return {
-    test: test
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App2.default);
-
-/***/ }),
+/* 96 */,
 /* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22321,6 +22282,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(28);
 
 var _AddForm = __webpack_require__(98);
 
@@ -22363,6 +22326,24 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  var test = function test() {
+    console.log('test');
+  };
+  return {
+    dispatch: dispatch,
+    test: test
+  };
+};
+
+/* eslint-disable no-class-assign */
+App = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
+/* eslint-enable no-class-assign */
+
 exports.default = App;
 
 /***/ }),
@@ -22386,11 +22367,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var AddForm = function AddForm(_ref) {
   var store = _ref.store;
-  var _store$getState$formR = store.getState().formReducer,
-      name = _store$getState$formR.name,
-      age = _store$getState$formR.age;
 
-  console.log(store.getState().formReducer);
+  // const { name, age } = store.getState().formReducer
+  // console.log(store.getState().formReducer)
   return _react2.default.createElement(
     'div',
     null,
@@ -22401,7 +22380,7 @@ var AddForm = function AddForm(_ref) {
         'label',
         { htmlFor: 'inputName' },
         'Name:\xA0',
-        _react2.default.createElement('input', { itemID: 'inputName', type: 'text', value: name, onChange: function onChange(e) {
+        _react2.default.createElement('input', { itemID: 'inputName', type: 'text', value: 1, onChange: function onChange(e) {
             return store.dispatch((0, _actions.changeName)(e.target.value));
           } })
       ),
@@ -22409,7 +22388,7 @@ var AddForm = function AddForm(_ref) {
         'label',
         { htmlFor: 'inputAge' },
         'Age:\xA0',
-        _react2.default.createElement('input', { itemID: 'iputAge', type: 'text', value: age, onChange: function onChange(e) {
+        _react2.default.createElement('input', { itemID: 'iputAge', type: 'text', value: 1, onChange: function onChange(e) {
             return store.dispatch((0, _actions.changeAge)(e.target.value));
           } })
       ),
