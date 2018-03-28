@@ -1,19 +1,17 @@
 {
   "name": "for-hrs-project-with-webpack",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "author": "masayuki suzuki",
   "license": "MIT",
   "scripts": {
-    "imagemin": "imagemin assets/img/original/*.* --out-dir=./www/jobfind-pc/original/images/ --plugin=pngquant",
-    "themeImgMin": "imagemin -p pngquant assets/img/theme/*.* -o www/jobfind-pc/themes/default/images",
-    "watch-imagemin": "onchange 'assets/img/original/*' -- npm run imagemin",
+    "imagemin": "imagemin ./assets/img/*.* --out-dir=./public/images/ --plugin=pngquant",
+    "watch-imagemin": "onchange 'assets/img/*' -- npm run imagemin",
     "dev": "webpack --config ./config/webpack.config.js --watch --progress",
     "server": "browser-sync start --config ./config/bs-config.js",
     "start": "npm-run-all -p dev watch-imagemin server",
     "build": "webpack --config ./config/webpack.config.js",
-    "prod": "webpack --env.prod --config ./config/webpack.config.js",
-    "remover": "rm -rf www/jobfind-pc/original/js/original.js www/jobfind-pc/original/js/original.js.map www/jobfind-pc/original/js/topPage.js www/jobfind-pc/original/js/topPage.js.map www/jobfind-pc/original/js/normalize.js www/jobfind-pc/original/js/normalize.js.map www/jobfind-pc/original/js/vendor"
+    "prod": "webpack --env.prod --config ./config/webpack.config.js"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",
@@ -34,14 +32,12 @@
     "eslint-plugin-react": "^7.7.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.0.6",
     "imagemin": "^5.3.1",
     "imagemin-cli": "^3.0.0",
     "imagemin-gifsicle": "^5.2.0",
     "imagemin-mozjpeg": "^7.0.0",
     "imagemin-pngquant": "^5.0.1",
     "node-sass": "^4.7.2",
-    "normalize-scss": "^7.0.1",
     "npm-run-all": "^4.1.2",
     "onchange": "^3.3.0",
     "postcss-loader": "^2.1.1",
@@ -49,7 +45,6 @@
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
     "pug": "^2.0.1",
-    "pug-html-loader": "^1.1.5",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
@@ -59,6 +54,8 @@
     "webpack-hot-middleware": "^2.21.0"
   },
   "dependencies": {
-    "swiper": "^4.1.6"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12"
   }
 }

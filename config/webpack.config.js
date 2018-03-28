@@ -3,7 +3,6 @@ require('babel-polyfill')
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SiteData = require('../assets/siteData')
 
 const extractSass = new ExtractTextPlugin({
@@ -15,11 +14,6 @@ const DEV = !process.argv.includes('--env.prod')
 const plugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.LoaderOptionsPlugin({ debug: true }),
-  new HtmlWebpackPlugin({
-    filename: 'index.html',
-    inject: false,
-    template: './assets/pug/jobfind/index.pug',
-  }),
   extractSass,
 ]
 
@@ -39,7 +33,7 @@ module.exports = {
     'vendor/normalize': path.join(__dirname, '../assets/sass/jobfind/vendor/normalize.scss')
   },
   output: {
-    path: path.resolve(__dirname, '../www/jobfind-pc/'),
+    path: path.resolve(__dirname, '../public/js'),
     filename: 'original/js/[name].js',
   },
   module: {
@@ -75,30 +69,14 @@ module.exports = {
             }),
           },
           {
-            test: /\.pug$/,
-            exclude: /(node_modules|partials|components|contents)/,
-            use: [
-              {
-                loader: "raw-loader",
-              },
-              {
-                loader: "pug-html-loader",
-                options: {
-                  pretty: true,
-                  data: SiteData
-                }
-              }
-            ]
-          },
-          {
             test: /\.(jpg|jpeg|png|gif|svg)$/,
             use: {
-              loader: 'file-loader?name=/jobfind-pc/original/images/[name].[ext]'
+              loader: 'file-loader?name=/public/images/[name].[ext]'
             }
           },
           {
             test: /\.(woff|woff2|eot|ttf|svg)$/,
-            loader: 'file-loader?name=/jobfind-pc/original/fonts/[name].[ext]'
+            loader: 'file-loader?name=/public/fonts/[name].[ext]'
           }
         ],
       },
