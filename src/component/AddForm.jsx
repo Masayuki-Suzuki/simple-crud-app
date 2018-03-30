@@ -1,19 +1,25 @@
 import React from 'react'
-import { changeName, changeAge } from '../actions/actions'
+import * as axios from 'axios'
+import 'babel-polyfill'
 
-const AddForm = ({ store }) => {
-  // const { name, age } = store.getState().formReducer
-  // console.log(store.getState().formReducer)
+const AddForm = ({ form, actions }) => {
+  const { name, age } = form
+  const POST_URL = '/api/characters'
+  async function handleSubmit(e, onInitForm) {
+    e.preventDefault()
+    const res = await axios.post(POST_URL, { name, age }).catch(err => console.log(err))
+    onInitForm(res)
+  }
   return (
     <div>
-      <form>
+      <form onSubmit={e => handleSubmit(e, actions.onInitForm)}>
         <label htmlFor="inputName">
           Name:&nbsp;
-          <input itemID="inputName" type="text" value={1} onChange={e => store.dispatch(changeName(e.target.value))} />
+          <input id="inputName" type="text" value={name} onChange={e => actions.onChangeName(e.target.value)} placeholder="e.g.)John" />
         </label>
         <label htmlFor="inputAge">
           Age:&nbsp;
-          <input itemID="iputAge" type="text" value={1} onChange={e => store.dispatch(changeAge(e.target.value))} />
+          <input itemID="iputAge" type="text" value={age} onChange={e => actions.onChangeAge(e.target.value)} placeholder="e.g.)20" />
         </label>
         <button>submit</button>
       </form>

@@ -1,3 +1,4 @@
+require('babel-core/register')
 require('babel-polyfill')
 
 const path = require('path')
@@ -26,7 +27,7 @@ if (!DEV) {
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, '../src/index.jsx'),
+    app: ['babel-polyfill', path.join(__dirname, '../src/index.jsx')],
     style: path.join(__dirname, '../assets/sass/style.scss'),
     'vendor/normalize': path.join(__dirname, '../assets/sass/vendor/normalize.scss')
   },

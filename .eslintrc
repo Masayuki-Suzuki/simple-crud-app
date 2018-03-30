@@ -10,7 +10,8 @@
       "allowTernary": true
     }],
     "use-isnan": 1,
-    "max-len": ["error", { "code": 200}]
+    "max-len": ["error", { "code": 200}],
+    "react/prop-types": false
   },
   "globals": {
     "window": true,

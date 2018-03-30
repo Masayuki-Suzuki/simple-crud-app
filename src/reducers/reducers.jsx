@@ -12,7 +12,7 @@ const initialState = {
   },
 }
 
-const formReducer = handleActions(
+const form = handleActions(
   {
     CHANGE_NAME: (state, action) => ({
       ...state,
@@ -22,11 +22,16 @@ const formReducer = handleActions(
       ...state,
       age: action.payload.age,
     }),
+    INITIALIZE_FORM: state => ({
+      ...state,
+      name: '',
+      age: '',
+    }),
   },
   initialState.form,
 )
 
-const charactersReducer = handleActions(
+const characters = handleActions(
   {
     CHARA_DUMMY: state => state,
   },
@@ -34,8 +39,8 @@ const charactersReducer = handleActions(
 )
 
 const rootReducer = combineReducers({
-  formReducer,
-  charactersReducer,
+  form,
+  characters,
 })
 
 // const rootReducer = {} // formReducer

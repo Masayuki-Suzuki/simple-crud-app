@@ -25,10 +25,8 @@ module.exports = {
   "watchOptions": {
     "ignoreInitial": true
   },
-  "server": {
-    "baseDir": "public"
-  },
-  "proxy": false,
+  "server": false,
+  "proxy": 'localhost:3000',
   "port": 4000,
   "middleware": false,
   "serveStatic": [],
