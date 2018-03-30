@@ -34,6 +34,50 @@ app.post('/api/characters', (req, res) => {
   })
 })
 
+app.get('/api/characters', (req, res) => {
+  Character.find({}, (err, characterArray) => {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.status(200).send(characterArray)
+    }
+  })
+})
+
+app.put('/api/characters', (req, res) => {
+  const { id } = req.body
+  Character.findByIdAndUpdate(id, { $inc: { age: 1 } }, (err) => {
+    if (err) {
+      res.status(500).send()
+    } else {
+      Character.find({}, (findErr, characterArray) => {
+        if (findErr) {
+          res.status(500).send()
+        } else {
+          res.status(200).send(characterArray)
+        }
+      })
+    }
+  })
+})
+
+app.delete('/api/characters', (req, res) => {
+  const { id } = req.body
+  Character.findByIdAndRemove(id, (err) => {
+    if (err) {
+      res.status(500).send()
+    } else {
+      Character.find({}, (findErr, characterArray) => {
+        if (findErr) {
+          res.status(500).send()
+        } else {
+          res.status(200).send(characterArray)
+        }
+      })
+    }
+  })
+})
+
 app.get('/', (req, res) => {
   if (res.err) {
     console.log('Error!!')

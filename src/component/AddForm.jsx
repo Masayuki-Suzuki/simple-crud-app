@@ -7,7 +7,10 @@ const AddForm = ({ form, actions }) => {
   const POST_URL = '/api/characters'
   async function handleSubmit(e, onInitForm) {
     e.preventDefault()
-    const res = await axios.post(POST_URL, { name, age }).catch(err => console.log(err))
+    const res = await axios.post(POST_URL, { name, age }).catch((err) => {
+      console.log(err)
+      throw new Error(err)
+    })
     onInitForm(res)
   }
   return (

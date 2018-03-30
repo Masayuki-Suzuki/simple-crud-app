@@ -10,7 +10,7 @@
     "dev": "webpack --config ./config/webpack.config.js --watch --progress",
     "server": "browser-sync start --config ./config/bs-config.js",
     "node": "nodemon ./server/server.js --config ./config/nodemon.json",
-    "start": "npm-run-all -p dev watch-imagemin server node",
+    "start": "npm-run-all -p node server dev watch-imagemin",
     "build": "webpack --config ./config/webpack.config.js",
     "prod": "webpack --env.prod --config ./config/webpack.config.js"
   },

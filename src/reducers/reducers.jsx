@@ -8,7 +8,13 @@ const initialState = {
   },
   characters: {
     isFetching: false,
-    characterArray: [],
+    characterArray: [
+      {
+        _id: 1,
+        name: 'ヌル ヌル男',
+        age: 'null',
+      },
+    ],
   },
 }
 
@@ -33,7 +39,19 @@ const form = handleActions(
 
 const characters = handleActions(
   {
-    CHARA_DUMMY: state => state,
+    REQUEST_DATA: state => ({
+      ...state,
+      isFetching: true,
+    }),
+    RECEIVE_DATA_SUCCESS: (state, action) => ({
+      ...state,
+      isFetching: false,
+      characterArray: action.payload.characterArray,
+    }),
+    RECEIVE_DATA_FAILED: state => ({
+      ...state,
+      isFetching: false,
+    }),
   },
   initialState.characters,
 )
