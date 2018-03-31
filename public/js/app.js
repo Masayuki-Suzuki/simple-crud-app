@@ -31903,6 +31903,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(156);
 
+var _axios = __webpack_require__(173);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _AddForm = __webpack_require__(432);
 
 var _AddForm2 = _interopRequireDefault(_AddForm);
@@ -31914,6 +31918,8 @@ var _CharacterList2 = _interopRequireDefault(_CharacterList);
 var _actions = __webpack_require__(452);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31932,6 +31938,50 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getInitData();
+    }
+  }, {
+    key: 'getInitData',
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var actions, URL, res;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                actions = this.props.actions;
+                URL = '/api/characters';
+
+                actions.onRequestData();
+                _context.next = 5;
+                return _axios2.default.get(URL).catch(function (err) {
+                  console.error(new Error(err));
+                  actions.onReceiveDataFailed(err);
+                  throw new Error(err);
+                });
+
+              case 5:
+                res = _context.sent;
+
+                actions.onReceiveData(res.data);
+
+              case 7:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getInitData() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getInitData;
+    }()
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -31951,8 +32001,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  var onInitForm = function onInitForm(res) {
-    console.log(res);
+  var onInitForm = function onInitForm() {
     dispatch((0, _actions.initializeForm)());
   };
   var onChangeName = function onChangeName(val) {
@@ -32018,25 +32067,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var AddForm = function AddForm(_ref) {
   var handleSubmit = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e, onInitForm) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
       var res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
-              _context.next = 3;
+              actions.onRequestData();
+              _context.next = 4;
               return axios.post(POST_URL, { name: name, age: age }).catch(function (err) {
                 console.log(err);
+                actions.onReceiveDataFailed(err);
                 throw new Error(err);
               });
 
-            case 3:
+            case 4:
               res = _context.sent;
 
-              onInitForm(res);
+              actions.onInitForm();
+              actions.onReceiveData(res.data);
 
-            case 5:
+            case 7:
             case 'end':
               return _context.stop();
           }
@@ -32044,7 +32096,7 @@ var AddForm = function AddForm(_ref) {
       }, _callee, this);
     }));
 
-    return function handleSubmit(_x, _x2) {
+    return function handleSubmit(_x) {
       return _ref2.apply(this, arguments);
     };
   }();
@@ -32058,31 +32110,44 @@ var AddForm = function AddForm(_ref) {
 
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'formContainer' },
+    _react2.default.createElement(
+      'h2',
+      null,
+      'Add New Person: '
+    ),
     _react2.default.createElement(
       'form',
-      { onSubmit: function onSubmit(e) {
-          return handleSubmit(e, actions.onInitForm);
+      { className: 'form', onSubmit: function onSubmit(e) {
+          return handleSubmit(e);
         } },
       _react2.default.createElement(
         'label',
-        { htmlFor: 'inputName' },
-        'Name:\xA0',
-        _react2.default.createElement('input', { id: 'inputName', type: 'text', value: name, onChange: function onChange(e) {
+        { className: 'form__label form__label--name', htmlFor: 'inputName' },
+        _react2.default.createElement(
+          'span',
+          { className: 'form__title' },
+          'Name'
+        ),
+        _react2.default.createElement('input', { className: 'form__input', id: 'inputName', type: 'text', value: name, onChange: function onChange(e) {
             return actions.onChangeName(e.target.value);
           }, placeholder: 'e.g.)John' })
       ),
       _react2.default.createElement(
         'label',
-        { htmlFor: 'inputAge' },
-        'Age:\xA0',
-        _react2.default.createElement('input', { itemID: 'iputAge', type: 'text', value: age, onChange: function onChange(e) {
+        { className: 'form__label form__label--age', htmlFor: 'inputAge' },
+        _react2.default.createElement(
+          'span',
+          { className: 'form__title' },
+          'Age'
+        ),
+        _react2.default.createElement('input', { className: 'form__input', id: 'iputAge', type: 'text', value: age, onChange: function onChange(e) {
             return actions.onChangeAge(e.target.value);
           }, placeholder: 'e.g.)20' })
       ),
       _react2.default.createElement(
         'button',
-        null,
+        { className: 'form__submit' },
         'submit'
       )
     )
@@ -32990,11 +33055,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _axios = __webpack_require__(173);
 
-var axios = _interopRequireWildcard(_axios);
+var _axios2 = _interopRequireDefault(_axios);
 
 __webpack_require__(80);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33002,9 +33065,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var URL = '/api/characters';
 
-var RenderCharacterList = function RenderCharacterList(_ref) {
+var TableRow = function TableRow(_ref) {
   var handleUpdateCharacter = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id, dec) {
       var res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -33012,7 +33075,7 @@ var RenderCharacterList = function RenderCharacterList(_ref) {
             case 0:
               actions.onRequestData();
               _context.next = 3;
-              return axios.put(URL, { id: id }).catch(function (err) {
+              return _axios2.default.put(URL, { id: id, dec: dec }).catch(function (err) {
                 console.error(new Error(err));
                 actions.onReceiveDataFailed(err);
                 throw new Error(err);
@@ -33031,7 +33094,7 @@ var RenderCharacterList = function RenderCharacterList(_ref) {
       }, _callee, this);
     }));
 
-    return function handleUpdateCharacter(_x) {
+    return function handleUpdateCharacter(_x, _x2) {
       return _ref2.apply(this, arguments);
     };
   }();
@@ -33045,8 +33108,8 @@ var RenderCharacterList = function RenderCharacterList(_ref) {
             case 0:
               actions.onRequestData();
               _context2.next = 3;
-              return axios({
-                method: 'delete',
+              return (0, _axios2.default)({
+                method: 'DELETE',
                 url: URL,
                 data: {
                   id: id
@@ -33070,99 +33133,131 @@ var RenderCharacterList = function RenderCharacterList(_ref) {
       }, _callee2, this);
     }));
 
-    return function handleDeleteCharacter(_x2) {
+    return function handleDeleteCharacter(_x3) {
       return _ref3.apply(this, arguments);
     };
   }();
 
-  var characters = _ref.characters,
+  var character = _ref.character,
       actions = _ref.actions;
 
-  var characterList = void 0;
+  return _react2.default.createElement(
+    'tr',
+    { className: 'list__row' },
+    _react2.default.createElement(
+      'td',
+      { className: 'list__name' },
+      '' + character.name
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      '(' + character.age + ')'
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      _react2.default.createElement(
+        'button',
+        { className: 'changeAge', onClick: function onClick() {
+            return handleUpdateCharacter(character._id, false);
+          } },
+        '+1'
+      )
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      _react2.default.createElement(
+        'button',
+        { className: 'changeAge', onClick: function onClick() {
+            return handleUpdateCharacter(character._id, true);
+          } },
+        '-1'
+      )
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      _react2.default.createElement(
+        'button',
+        { className: 'delBtn', onClick: function onClick() {
+            return handleDeleteCharacter(character._id);
+          } },
+        'delete'
+      )
+    )
+  );
+};
+
+var DataTable = function DataTable(_ref4) {
+  var characters = _ref4.characters,
+      actions = _ref4.actions;
+
+  var tableDataAll = void 0;
   if (characters.isFetching) {
-    characterList = _react2.default.createElement(
-      'li',
+    tableDataAll = _react2.default.createElement(
+      'p',
       null,
       'Now Loading....'
     );
   } else {
-    characterList = characters.characterArray.map(function (character) {
-      return _react2.default.createElement(
-        'li',
-        { key: character._id },
-        character.name + '(' + character.age + ')',
+    tableDataAll = _react2.default.createElement(
+      'table',
+      { className: 'list' },
+      _react2.default.createElement(
+        'tbody',
+        null,
         _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return handleUpdateCharacter(character._id);
-            } },
-          '+1'
+          'tr',
+          { className: 'list__row' },
+          _react2.default.createElement(
+            'th',
+            { className: 'list__name list__name--head' },
+            'Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'list__age' },
+            'Age'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'list__inc' },
+            'Age +1'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'list__dec' },
+            'Age -1'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'list__del' },
+            'Delete'
+          )
         ),
-        _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return handleDeleteCharacter(character._id);
-            } },
-          'delete'
-        )
-      );
-    });
+        characters.characterArray.map(function (character) {
+          return _react2.default.createElement(TableRow, { key: '' + character._id, character: character, actions: actions });
+        })
+      )
+    );
   }
-  return _react2.default.createElement(
-    'ul',
-    null,
-    characterList
-  );
+  return tableDataAll;
 };
 
-var CharacterList = function CharacterList(_ref4) {
-  var handleFetchData = function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var res;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              actions.onRequestData();
-              _context3.next = 3;
-              return axios.get(URL).catch(function (err) {
-                console.error(new Error(err));
-                actions.onReceiveDataFailed(err);
-                throw new Error(err);
-              });
-
-            case 3:
-              res = _context3.sent;
-
-              actions.onReceiveData(res.data);
-
-            case 5:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, this);
-    }));
-
-    return function handleFetchData() {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-
-  var characters = _ref4.characters,
-      actions = _ref4.actions;
-
+var CharacterList = function CharacterList(_ref5) {
+  var characters = _ref5.characters,
+      actions = _ref5.actions;
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'listWrapper' },
     _react2.default.createElement(
-      'button',
-      { onClick: function onClick() {
-          return handleFetchData();
-        } },
-      'fetch data'
+      'h2',
+      { className: 'list__hd' },
+      'Persons List'
     ),
-    _react2.default.createElement(RenderCharacterList, { characters: characters, actions: actions })
+    _react2.default.createElement(DataTable, { characters: characters, actions: actions })
   );
 };
 
@@ -34624,11 +34719,7 @@ var initialState = {
   },
   characters: {
     isFetching: false,
-    characterArray: [{
-      _id: 1,
-      name: 'ヌル ヌル男',
-      age: 'null'
-    }]
+    characterArray: []
   }
 };
 

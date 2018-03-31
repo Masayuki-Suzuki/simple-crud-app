@@ -1,11 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import AddForm from './AddForm'
 import CharacterList from './CharacterList'
-import {changeAge, changeName, initializeForm, receiveDataFailed, receiveDataSuccess, requestData} from '../actions/actions'
+import { changeAge, changeName, initializeForm, receiveDataFailed, receiveDataSuccess, requestData } from '../actions/actions'
 
 /* eslint react/prefer-stateless-function: 0 */
 class App extends Component {
+  componentDidMount() {
+    this.getInitData()
+  }
+  async getInitData() {
+    const { actions } = this.props
+    const URL = '/api/characters'
+    actions.onRequestData()
+    const res = await axios.get(URL).catch((err) => {
+      console.error(new Error(err))
+      actions.onReceiveDataFailed(err)
+      throw new Error(err)
+    })
+    actions.onReceiveData(res.data)
+  }
   render() {
     return (
       <div>
@@ -19,8 +34,7 @@ class App extends Component {
 const mapStateToProps = state => state
 
 const mapDispatchToProps = (dispatch) => {
-  const onInitForm = (res) => {
-    console.log(res)
+  const onInitForm = () => {
     dispatch(initializeForm())
   }
   const onChangeName = (val) => {

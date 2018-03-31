@@ -29,7 +29,13 @@ app.post('/api/characters', (req, res) => {
     if (err) {
       res.status(500)
     } else {
-      res.status(200).send(`${name}(${age}) was successfully created.`)
+      Character.find({}, (findErr, characterArray) => {
+        if (findErr) {
+          res.status(500).send()
+        } else {
+          res.status(200).send(characterArray)
+        }
+      })
     }
   })
 })
@@ -45,8 +51,9 @@ app.get('/api/characters', (req, res) => {
 })
 
 app.put('/api/characters', (req, res) => {
-  const { id } = req.body
-  Character.findByIdAndUpdate(id, { $inc: { age: 1 } }, (err) => {
+  const { id, dec } = req.body
+  const INC = dec ? -1 : 1
+  Character.findByIdAndUpdate(id, { $inc: { age: INC } }, (err) => {
     if (err) {
       res.status(500).send()
     } else {

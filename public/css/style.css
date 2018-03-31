@@ -389,4 +389,102 @@ div#container {
     .mb20 {
       margin-bottom: 10px; } }
 
+body {
+  color: #332;
+  font-size: 1.6rem;
+  font-family: "-apple-system", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "\30D2\30E9\30AE\30CE\89D2\30B4   ProN W3", "Yu Gothic", YuGothic, Meiryo, メイリオ, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0; }
+
+label {
+  display: block; }
+
+.formContainer {
+  border: solid 1px #ccc;
+  border-radius: 6px;
+  display: block;
+  margin: 20px auto 30px;
+  padding: 15px;
+  width: 400px; }
+  .formContainer h2 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin: 0 0 10px; }
+
+.form {
+  margin: 0; }
+  .form__label {
+    margin: 0 0 10px; }
+  .form__input {
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    display: inline-block;
+    padding: 5px 10px;
+    width: 300px; }
+  .form__title {
+    display: inline-block;
+    width: 4em; }
+  .form__submit {
+    background: #08a;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-align: center;
+    text-transform: capitalize;
+    display: block;
+    margin: 10px auto 0;
+    padding: 7px 15px; }
+
+.listWrapper {
+  border: solid 1px #ccc;
+  border-radius: 6px;
+  margin: 0 auto;
+  max-width: 1024px;
+  width: 90%; }
+  .listWrapper h2 {
+    font-weight: 500;
+    text-align: center;
+    margin: 10px auto 0; }
+
+.list {
+  border-collapse: collapse;
+  width: 100%; }
+  .list th, .list td {
+    padding: 10px 0;
+    text-align: center; }
+  .list__row {
+    border-bottom: solid 1px #ccc;
+    padding: 12px 0; }
+    .list__row:nth-of-type(even) {
+      background: #f1f1f1; }
+    .list__row:last-of-type {
+      border-bottom: 0; }
+  .list__name {
+    width: 40%; }
+
+.delBtn {
+  background: #c00;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  text-transform: uppercase; }
+
+.changeAge {
+  background: #080;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 5px 20px;
+  text-transform: uppercase; }
+
 /*# sourceMappingURL=style.css.map*/

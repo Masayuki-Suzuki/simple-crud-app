@@ -8,13 +8,7 @@ const initialState = {
   },
   characters: {
     isFetching: false,
-    characterArray: [
-      {
-        _id: 1,
-        name: 'ヌル ヌル男',
-        age: 'null',
-      },
-    ],
+    characterArray: [],
   },
 }
 
